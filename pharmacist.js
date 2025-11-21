@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * SwasthyaBhandhu - Pharmacist Dashboard
  * 
@@ -33,8 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeSearch();
 });
 
-// ============== PROFILE MANAGEMENT ==============
-
+// ============== PROFILE MANAGEMENT =======
 function loadProfile() {
     document.getElementById('profile-name').value = currentUser.name || '';
     document.getElementById('profile-license').value = currentUser.licenseNo || '';
@@ -68,8 +66,7 @@ function saveProfile(event) {
     return false;
 }
 
-// ============== MEDICINE INVENTORY ==============
-
+// ============== MEDICINE INVENTORY =======
 function loadInventory() {
     const inventory = getInventory();
     const tbody = document.getElementById('inventory-list');
@@ -230,8 +227,7 @@ function initializeSearch() {
     });
 }
 
-// ============== PRESCRIPTIONS ==============
-
+// ============== PRESCRIPTIONS =======
 function loadPrescriptions() {
     const prescriptions = JSON.parse(localStorage.getItem(StorageKeys.PRESCRIPTIONS) || '[]');
     const container = document.getElementById('prescriptions-list');
@@ -266,8 +262,7 @@ function fulfillPrescription(id) {
     // In production, create actual order and update inventory
 }
 
-// ============== ORDERS ==============
-
+// ============== ORDERS =======
 function loadOrders() {
     const orders = getOrders();
     const container = document.getElementById('orders-list');
@@ -401,8 +396,7 @@ function getOrderStatusBadge(status) {
     return badges[status] || 'info';
 }
 
-// ============== FEEDBACK ==============
-
+// ============== FEEDBACK =======
 function loadFeedback() {
     const feedbacks = JSON.parse(localStorage.getItem('swasthya_feedbacks') || '[]')
         .filter(fb => fb.type === 'pharmacist');
@@ -426,8 +420,7 @@ function loadFeedback() {
     `).join('');
 }
 
-// ============== ANALYTICS ==============
-
+// ============== ANALYTICS =======
 function loadAnalytics() {
     const inventory = getInventory();
     const orders = getOrders();
@@ -467,44 +460,6 @@ function getDaysUntilExpiry(expiryDate) {
     const expiry = new Date(expiryDate);
     return Math.floor((expiry - today) / (1000 * 60 * 60 * 24));
 }
-=======
-/**
- * SwasthyaBhandhu - Pharmacist Dashboard
- * 
- * NOTE: All data is static and stored in localStorage.
- * In production, replace with API calls to backend server.
- */
-
-// Global variables
-let currentUser = null;
-
-// Initialize page
-document.addEventListener('DOMContentLoaded', () => {
-    // Check authentication
-    currentUser = requireAuth(['pharmacist']);
-    if (!currentUser) return;
-
-    // Display user name
-    document.getElementById('user-name').textContent = currentUser.name;
-
-    // Initialize tabs
-    initializeTabs('pharmacist-tabs');
-
-    // Load data
-    loadProfile();
-    loadInventory();
-    loadPrescriptions();
-    loadOrders();
-    loadFeedback();
-    loadAnalytics();
-
-    // Initialize search
-    initializeSearch();
-});
-
-// ============== PROFILE MANAGEMENT ==============
-
-function loadProfile() {
     document.getElementById('profile-name').value = currentUser.name || '';
     document.getElementById('profile-license').value = currentUser.licenseNo || '';
     document.getElementById('profile-email').value = currentUser.email || '';
@@ -537,9 +492,7 @@ function saveProfile(event) {
     return false;
 }
 
-// ============== MEDICINE INVENTORY ==============
-
-function loadInventory() {
+// ============== MEDICINE INVENTORY =======function loadInventory() {
     const inventory = getInventory();
     const tbody = document.getElementById('inventory-list');
     
@@ -699,9 +652,7 @@ function initializeSearch() {
     });
 }
 
-// ============== PRESCRIPTIONS ==============
-
-function loadPrescriptions() {
+// ============== PRESCRIPTIONS =======function loadPrescriptions() {
     const prescriptions = JSON.parse(localStorage.getItem(StorageKeys.PRESCRIPTIONS) || '[]');
     const container = document.getElementById('prescriptions-list');
     
@@ -735,9 +686,7 @@ function fulfillPrescription(id) {
     // In production, create actual order and update inventory
 }
 
-// ============== ORDERS ==============
-
-function loadOrders() {
+// ============== ORDERS =======function loadOrders() {
     const orders = getOrders();
     const container = document.getElementById('orders-list');
     
@@ -870,9 +819,7 @@ function getOrderStatusBadge(status) {
     return badges[status] || 'info';
 }
 
-// ============== FEEDBACK ==============
-
-function loadFeedback() {
+// ============== FEEDBACK =======function loadFeedback() {
     const feedbacks = JSON.parse(localStorage.getItem('swasthya_feedbacks') || '[]')
         .filter(fb => fb.type === 'pharmacist');
     
@@ -895,9 +842,7 @@ function loadFeedback() {
     `).join('');
 }
 
-// ============== ANALYTICS ==============
-
-function loadAnalytics() {
+// ============== ANALYTICS =======function loadAnalytics() {
     const inventory = getInventory();
     const orders = getOrders();
     
@@ -936,4 +881,3 @@ function getDaysUntilExpiry(expiryDate) {
     const expiry = new Date(expiryDate);
     return Math.floor((expiry - today) / (1000 * 60 * 60 * 24));
 }
->>>>>>> 5077bc9c683a2a0fb8a849ec2e6a1ee90d73b6ad

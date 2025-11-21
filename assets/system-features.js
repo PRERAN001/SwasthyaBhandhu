@@ -3,8 +3,7 @@
  * Digital Health ID, PWA, Emergency Mode, E-Prescription Security
  */
 
-// ============== DIGITAL HEALTH ID + QR SYSTEM ==============
-
+// ============== DIGITAL HEALTH ID + QR SYSTEM =======
 class DigitalHealthID {
     static generate(user) {
         const healthID = {
@@ -85,8 +84,7 @@ class DigitalHealthID {
     }
 }
 
-// ============== PWA (PROGRESSIVE WEB APP) ==============
-
+// ============== PWA (PROGRESSIVE WEB APP) =======
 class PWAManager {
     static initialize() {
         // Register service worker
@@ -150,9 +148,7 @@ class PWAManager {
     }
 }
 
-// ============== EMERGENCY MODE ==============
-
-class EmergencyMode {
+// ============== EMERGENCY MODE =======class EmergencyMode {
     static activate() {
         const user = JSON.parse(localStorage.getItem(StorageKeys.CURRENT_USER) || '{}');
         
@@ -237,8 +233,7 @@ class EmergencyMode {
     }
 }
 
-// ============== TAMPER-PROOF E-PRESCRIPTIONS ==============
-
+// ============== TAMPER-PROOF E-PRESCRIPTIONS =======
 class SecurePrescription {
     static generate(prescriptionData, doctorId) {
         const prescription = {
@@ -334,8 +329,7 @@ class SecurePrescription {
     }
 }
 
-// ============== INITIALIZATION ==============
-
+// ============== INITIALIZATION =======
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize PWA
     PWAManager.initialize();

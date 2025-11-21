@@ -3,7 +3,7 @@
  * This file contains shared functionality used across all pages
  */
 
-// ============== STATIC DATA STORAGE ==============
+// ============== STATIC DATA STORAGE =======
 // Note: This uses localStorage to persist data across sessions
 // In a production environment, this would be replaced with API calls
 
@@ -113,8 +113,7 @@ function initializeDefaultData() {
     }
 }
 
-// ============== AUTHENTICATION ==============
-
+// ============== AUTHENTICATION =======
 function login(email, password) {
     const users = JSON.parse(localStorage.getItem(StorageKeys.USERS) || '[]');
     const user = users.find(u => u.email === email && u.password === password && u.active);
@@ -187,30 +186,66 @@ function requireAuth(allowedRoles = []) {
     return user;
 }
 
-// ============== TAB MANAGEMENT ==============
-
+// ============== TAB MANAGEMENT =======
 function initializeTabs(tabsContainerId) {
     const tabsContainer = document.getElementById(tabsContainerId);
     if (!tabsContainer) return;
     
-    const headers = tabsContainer.querySelectorAll('.tab-header');
+    // Use event delegation so tabs added dynamically also work
+    const headersContainer = tabsContainer.querySelector('.tab-headers');
     const contents = tabsContainer.querySelectorAll('.tab-content');
-    
-    headers.forEach((header, index) => {
-        header.addEventListener('click', () => {
-            // Remove active class from all
-            headers.forEach(h => h.classList.remove('active'));
-            contents.forEach(c => c.classList.remove('active'));
-            
-            // Add active class to clicked tab
-            header.classList.add('active');
-            contents[index].classList.add('active');
-        });
+
+    if (!headersContainer) return;
+
+    // Helper to activate a tab by index
+    function activateTabByIndex(index) {
+        const headers = Array.from(headersContainer.querySelectorAll('.tab-header'));
+        const contentsList = Array.from(contents);
+
+        // Guard: ensure index is valid
+        if (index < 0 || index >= headers.length || index >= contentsList.length) return;
+
+        headers.forEach(h => h.classList.remove('active'));
+        contentsList.forEach(c => c.classList.remove('active'));
+
+        headers[index].classList.add('active');
+        contentsList[index].classList.add('active');
+    }
+
+    // Click delegation
+    headersContainer.addEventListener('click', (e) => {
+        const header = e.target.closest('.tab-header');
+        if (!header || !headersContainer.contains(header)) return;
+
+        const headers = Array.from(headersContainer.querySelectorAll('.tab-header'));
+        const index = headers.indexOf(header);
+        if (index === -1) return;
+
+        activateTabByIndex(index);
+    });
+
+    // Keyboard accessibility: allow left/right arrow to navigate tabs
+    headersContainer.addEventListener('keydown', (e) => {
+        const key = e.key;
+        if (key !== 'ArrowLeft' && key !== 'ArrowRight') return;
+
+        const headers = Array.from(headersContainer.querySelectorAll('.tab-header'));
+        const activeIndex = headers.findIndex(h => h.classList.contains('active'));
+        if (activeIndex === -1) return;
+
+        let nextIndex = activeIndex;
+        if (key === 'ArrowLeft') nextIndex = Math.max(0, activeIndex - 1);
+        if (key === 'ArrowRight') nextIndex = Math.min(headers.length - 1, activeIndex + 1);
+
+        if (nextIndex !== activeIndex) {
+            headers[nextIndex].focus();
+            activateTabByIndex(nextIndex);
+            e.preventDefault();
+        }
     });
 }
 
-// ============== MODAL MANAGEMENT ==============
-
+// ============== MODAL MANAGEMENT =======
 function openModal(modalId) {
     const modal = document.getElementById(modalId);
     if (modal) {
@@ -232,8 +267,7 @@ document.addEventListener('click', (e) => {
     }
 });
 
-// ============== GOOGLE TRANSLATE ==============
-
+// ============== GOOGLE TRANSLATE =======
 function initializeGoogleTranslate() {
     // Add Google Translate script
     const script = document.createElement('script');
@@ -252,8 +286,7 @@ function initializeGoogleTranslate() {
     };
 }
 
-// ============== UTILITY FUNCTIONS ==============
-
+// ============== UTILITY FUNCTIONS =======
 function formatDate(dateString) {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-IN', {
@@ -294,8 +327,7 @@ function generateId(prefix = 'ID') {
     return `${prefix}-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 }
 
-// ============== DATA HELPERS ==============
-
+// ============== DATA HELPERS =======
 function saveData(key, data) {
     localStorage.setItem(key, JSON.stringify(data));
 }
@@ -322,8 +354,7 @@ function updateUser(userId, updates) {
     return false;
 }
 
-// ============== FORM VALIDATION ==============
-
+// ============== FORM VALIDATION =======
 function validateEmail(email) {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
@@ -380,8 +411,7 @@ function validateForm(formId, rules) {
     return isValid;
 }
 
-// ============== INITIALIZATION ==============
-
+// ============== INITIALIZATION =======
 document.addEventListener('DOMContentLoaded', () => {
     initializeDefaultData();
     initializeGoogleTranslate();

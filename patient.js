@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 /**
  * SwasthyaBhandhu - Patient Dashboard
  * 
@@ -43,8 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeRatingStars();
 });
 
-// ============== PROFILE MANAGEMENT ==============
-
+// ============== PROFILE MANAGEMENT =======
 function loadProfile() {
     document.getElementById('profile-name').value = currentUser.name || '';
     document.getElementById('profile-email').value = currentUser.email || '';
@@ -82,8 +81,7 @@ function saveProfile(event) {
     return false;
 }
 
-// ============== AI HEALTH ASSISTANT & REPORT GENERATION ==============
-
+// ============== AI HEALTH ASSISTANT & REPORT GENERATION =======
 /**
  * Generate health report using Groq API based on conversation summary
  */
@@ -315,25 +313,17 @@ function downloadReport() {
     // Create a simple text version
     const textContent = `
 SWASTHYABHANDHU HEALTH REPORT
-================================
-
-Patient: ${report.patientName}
+=========================Patient: ${report.patientName}
 Date: ${formatDateTime(report.generatedAt)}
 Report ID: ${report.id}
 
-================================
-
-CONVERSATION SUMMARY:
+=========================CONVERSATION SUMMARY:
 ${report.conversationSummary}
 
-================================
-
-REPORT:
+=========================REPORT:
 ${stripHtml(report.content)}
 
-================================
-
-DISCLAIMER:
+=========================DISCLAIMER:
 This report is for informational purposes only and does not constitute 
 medical advice. Please consult a healthcare professional for proper 
 diagnosis and treatment.
@@ -364,8 +354,7 @@ function stripHtml(html) {
     return tmp.textContent || tmp.innerText || '';
 }
 
-// ============== AI SYMPTOM CHECKER ==============
-
+// ============== AI SYMPTOM CHECKER =======
 async function checkSymptoms(event) {
     event.preventDefault();
     
@@ -483,8 +472,7 @@ function saveSymptomAnalysis() {
     showAlert('Symptom analysis saved to your health records', 'success');
 }
 
-// ============== APPOINTMENTS ==============
-
+// ============== APPOINTMENTS =======
 function loadAppointments() {
     const appointments = getPatientAppointments();
     const container = document.getElementById('appointments-list');
@@ -578,8 +566,7 @@ function getStatusBadge(status) {
     return badges[status] || 'info';
 }
 
-// ============== PRESCRIPTIONS ==============
-
+// ============== PRESCRIPTIONS =======
 function loadPrescriptions() {
     const prescriptions = getPatientPrescriptions();
     const container = document.getElementById('prescriptions-list');
@@ -636,8 +623,7 @@ function downloadPrescription(id) {
     showAlert('Prescription download started (simulated)', 'info');
 }
 
-// ============== AI PRESCRIPTION SAFETY CHECKER ==============
-
+// ============== AI PRESCRIPTION SAFETY CHECKER =======
 async function checkPrescriptionSafety(prescriptionId) {
     const prescriptions = getPatientPrescriptions();
     const prescription = prescriptions.find(rx => rx.id === prescriptionId);
@@ -710,8 +696,7 @@ function saveSafetyCheck(data) {
     localStorage.setItem('swasthya_safety_checks', JSON.stringify(checks));
 }
 
-// ============== CONSULTATION HISTORY ==============
-
+// ============== CONSULTATION HISTORY =======
 function loadConsultationHistory() {
     const consultations = VideoConsultation.getConsultationHistory(currentUser.id);
     const container = document.getElementById('consultation-history-list');
@@ -755,8 +740,7 @@ function calculateDuration(start, end) {
     return `${duration} minutes`;
 }
 
-// ============== FEEDBACK ==============
-
+// ============== FEEDBACK =======
 function initializeRatingStars() {
     const stars = document.querySelectorAll('.star');
     stars.forEach(star => {
@@ -836,8 +820,7 @@ function loadFeedback() {
     `).join('');
 }
 
-// ============== DOCUMENTS ==============
-
+// ============== DOCUMENTS =======
 function handleDocumentUpload(event) {
     const file = event.target.files[0];
     if (!file) return;
@@ -897,8 +880,7 @@ function deleteDocument(id) {
     loadDocuments();
 }
 
-// ============== MESSAGING ==============
-
+// ============== MESSAGING =======
 function loadDoctors() {
     const doctors = getAllUsers().filter(u => u.role === 'doctor');
     const container = document.getElementById('doctors-list');
@@ -980,8 +962,7 @@ function sendMessage() {
     showAlert('Message sent', 'success');
 }
 
-// ============== ANALYTICS ==============
-
+// ============== ANALYTICS =======
 function loadAnalytics() {
     const appointments = getPatientAppointments();
     const consultations = VideoConsultation.getConsultationHistory(currentUser.id);
@@ -1005,54 +986,6 @@ function loadAnalytics() {
     document.getElementById('last-checkup').textContent = lastCheckup;
     document.getElementById('next-appointment').textContent = nextAppointment;
 }
-=======
-/**
- * SwasthyaBhandhu - Patient Dashboard
- * 
- * NOTE: All data is static and stored in localStorage.
- * In production, replace with API calls to backend server.
- */
-
-// Global variables
-let currentUser = null;
-let currentDoctor = null;
-let selectedRating = 0;
-let currentReportId = null;
-
-// Groq API Configuration - Load from config.js
-const GROQ_API_KEY = () => CONFIG.GROQ_API_KEY || prompt('Please enter your Groq API key:');
-const GROQ_API_URL = CONFIG.GROQ_API_URL;
-
-// Initialize page
-document.addEventListener('DOMContentLoaded', () => {
-    // Check authentication
-    currentUser = requireAuth(['patient']);
-    if (!currentUser) return;
-
-    // Display user name
-    document.getElementById('user-name').textContent = currentUser.name;
-
-    // Initialize tabs
-    initializeTabs('patient-tabs');
-
-    // Load data
-    loadProfile();
-    loadPreviousReports();
-    loadAppointments();
-    loadPrescriptions();
-    loadConsultationHistory();
-    loadDoctors();
-    loadFeedback();
-    loadDocuments();
-    loadAnalytics();
-
-    // Initialize rating stars
-    initializeRatingStars();
-});
-
-// ============== PROFILE MANAGEMENT ==============
-
-function loadProfile() {
     document.getElementById('profile-name').value = currentUser.name || '';
     document.getElementById('profile-email').value = currentUser.email || '';
     document.getElementById('profile-phone').value = currentUser.phone || '';
@@ -1089,9 +1022,7 @@ function saveProfile(event) {
     return false;
 }
 
-// ============== AI HEALTH ASSISTANT & REPORT GENERATION ==============
-
-/**
+// ============== AI HEALTH ASSISTANT & REPORT GENERATION =======/**
  * Generate health report using Groq API based on conversation summary
  */
 async function generateHealthReport() {
@@ -1322,25 +1253,17 @@ function downloadReport() {
     // Create a simple text version
     const textContent = `
 SWASTHYABHANDHU HEALTH REPORT
-================================
-
-Patient: ${report.patientName}
+=========================Patient: ${report.patientName}
 Date: ${formatDateTime(report.generatedAt)}
 Report ID: ${report.id}
 
-================================
-
-CONVERSATION SUMMARY:
+=========================CONVERSATION SUMMARY:
 ${report.conversationSummary}
 
-================================
-
-REPORT:
+=========================REPORT:
 ${stripHtml(report.content)}
 
-================================
-
-DISCLAIMER:
+=========================DISCLAIMER:
 This report is for informational purposes only and does not constitute 
 medical advice. Please consult a healthcare professional for proper 
 diagnosis and treatment.
@@ -1371,9 +1294,7 @@ function stripHtml(html) {
     return tmp.textContent || tmp.innerText || '';
 }
 
-// ============== AI SYMPTOM CHECKER ==============
-
-async function checkSymptoms(event) {
+// ============== AI SYMPTOM CHECKER =======async function checkSymptoms(event) {
     event.preventDefault();
     
     const form = event.target;
@@ -1490,9 +1411,7 @@ function saveSymptomAnalysis() {
     showAlert('Symptom analysis saved to your health records', 'success');
 }
 
-// ============== APPOINTMENTS ==============
-
-function loadAppointments() {
+// ============== APPOINTMENTS =======function loadAppointments() {
     const appointments = getPatientAppointments();
     const container = document.getElementById('appointments-list');
     
@@ -1585,9 +1504,7 @@ function getStatusBadge(status) {
     return badges[status] || 'info';
 }
 
-// ============== PRESCRIPTIONS ==============
-
-function loadPrescriptions() {
+// ============== PRESCRIPTIONS =======function loadPrescriptions() {
     const prescriptions = getPatientPrescriptions();
     const container = document.getElementById('prescriptions-list');
     
@@ -1643,9 +1560,7 @@ function downloadPrescription(id) {
     showAlert('Prescription download started (simulated)', 'info');
 }
 
-// ============== AI PRESCRIPTION SAFETY CHECKER ==============
-
-async function checkPrescriptionSafety(prescriptionId) {
+// ============== AI PRESCRIPTION SAFETY CHECKER =======async function checkPrescriptionSafety(prescriptionId) {
     const prescriptions = getPatientPrescriptions();
     const prescription = prescriptions.find(rx => rx.id === prescriptionId);
     
@@ -1717,9 +1632,7 @@ function saveSafetyCheck(data) {
     localStorage.setItem('swasthya_safety_checks', JSON.stringify(checks));
 }
 
-// ============== CONSULTATION HISTORY ==============
-
-function loadConsultationHistory() {
+// ============== CONSULTATION HISTORY =======function loadConsultationHistory() {
     const consultations = VideoConsultation.getConsultationHistory(currentUser.id);
     const container = document.getElementById('consultation-history-list');
     
@@ -1762,9 +1675,7 @@ function calculateDuration(start, end) {
     return `${duration} minutes`;
 }
 
-// ============== FEEDBACK ==============
-
-function initializeRatingStars() {
+// ============== FEEDBACK =======function initializeRatingStars() {
     const stars = document.querySelectorAll('.star');
     stars.forEach(star => {
         star.addEventListener('click', () => {
@@ -1843,9 +1754,7 @@ function loadFeedback() {
     `).join('');
 }
 
-// ============== DOCUMENTS ==============
-
-function handleDocumentUpload(event) {
+// ============== DOCUMENTS =======function handleDocumentUpload(event) {
     const file = event.target.files[0];
     if (!file) return;
 
@@ -1904,9 +1813,7 @@ function deleteDocument(id) {
     loadDocuments();
 }
 
-// ============== MESSAGING ==============
-
-function loadDoctors() {
+// ============== MESSAGING =======function loadDoctors() {
     const doctors = getAllUsers().filter(u => u.role === 'doctor');
     const container = document.getElementById('doctors-list');
     
@@ -1987,9 +1894,7 @@ function sendMessage() {
     showAlert('Message sent', 'success');
 }
 
-// ============== ANALYTICS ==============
-
-function loadAnalytics() {
+// ============== ANALYTICS =======function loadAnalytics() {
     const appointments = getPatientAppointments();
     const consultations = VideoConsultation.getConsultationHistory(currentUser.id);
     const prescriptions = getPatientPrescriptions();
@@ -2012,4 +1917,3 @@ function loadAnalytics() {
     document.getElementById('last-checkup').textContent = lastCheckup;
     document.getElementById('next-appointment').textContent = nextAppointment;
 }
->>>>>>> 5077bc9c683a2a0fb8a849ec2e6a1ee90d73b6ad

@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 /**
  * SwasthyaBhandhu - Admin Dashboard
  * 
@@ -37,8 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeSearch();
 });
 
-// ============== PROFILE MANAGEMENT ==============
-
+// ============== PROFILE MANAGEMENT =======
 function loadProfile() {
     document.getElementById('profile-name').value = currentUser.name || '';
     document.getElementById('profile-email').value = currentUser.email || '';
@@ -67,8 +66,7 @@ function saveProfile(event) {
     return false;
 }
 
-// ============== USER MANAGEMENT ==============
-
+// ============== USER MANAGEMENT =======
 function loadUsers() {
     allUsers = getAllUsers();
     displayUsers(allUsers);
@@ -191,8 +189,7 @@ function toggleUserStatus(userId) {
     loadStatistics();
 }
 
-// ============== ACTIVITY LOG ==============
-
+// ============== ACTIVITY LOG =======
 function loadActivityLog() {
     const activities = getActivityLog();
     const container = document.getElementById('activity-log');
@@ -246,8 +243,7 @@ function getActivityLog() {
     return activities.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
 }
 
-// ============== STATISTICS ==============
-
+// ============== STATISTICS =======
 function loadStatistics() {
     const users = getAllUsers();
     const appointments = JSON.parse(localStorage.getItem(StorageKeys.APPOINTMENTS) || '[]');
@@ -268,8 +264,7 @@ function loadStatistics() {
     document.getElementById('active-users').textContent = activeUsers.length;
 }
 
-// ============== FEEDBACK ==============
-
+// ============== FEEDBACK =======
 function loadFeedback() {
     const feedbacks = JSON.parse(localStorage.getItem('swasthya_feedbacks') || '[]');
     
@@ -341,8 +336,7 @@ function loadFeedback() {
     `).join('');
 }
 
-// ============== AI SENTIMENT ANALYSIS ==============
-
+// ============== AI SENTIMENT ANALYSIS =======
 async function analyzeSentiment(feedbackId, comment) {
     const sentimentBadge = document.getElementById(`sentiment-${feedbackId}`);
     sentimentBadge.style.display = 'inline-block';
@@ -433,48 +427,6 @@ function saveSentimentAnalysis(feedbackId, analysis) {
     analyses[feedbackId] = { ...analysis, analyzedAt: new Date().toISOString() };
     localStorage.setItem('swasthya_sentiment_analyses', JSON.stringify(analyses));
 }
-=======
-/**
- * SwasthyaBhandhu - Admin Dashboard
- * 
- * NOTE: All data is static and stored in localStorage.
- * In production, replace with API calls to backend server.
- */
-
-// Global variables
-let currentUser = null;
-let allUsers = [];
-
-// Groq API Configuration - Load from config.js
-const GROQ_API_KEY = () => CONFIG.GROQ_API_KEY || prompt('Please enter your Groq API key:');
-const GROQ_API_URL = CONFIG.GROQ_API_URL;
-
-// Initialize page
-document.addEventListener('DOMContentLoaded', () => {
-    // Check authentication
-    currentUser = requireAuth(['admin']);
-    if (!currentUser) return;
-
-    // Display user name
-    document.getElementById('user-name').textContent = currentUser.name;
-
-    // Initialize tabs
-    initializeTabs('admin-tabs');
-
-    // Load data
-    loadProfile();
-    loadUsers();
-    loadActivityLog();
-    loadStatistics();
-    loadFeedback();
-
-    // Initialize search and filters
-    initializeSearch();
-});
-
-// ============== PROFILE MANAGEMENT ==============
-
-function loadProfile() {
     document.getElementById('profile-name').value = currentUser.name || '';
     document.getElementById('profile-email').value = currentUser.email || '';
     document.getElementById('profile-phone').value = currentUser.phone || '';
@@ -502,9 +454,7 @@ function saveProfile(event) {
     return false;
 }
 
-// ============== USER MANAGEMENT ==============
-
-function loadUsers() {
+// ============== USER MANAGEMENT =======function loadUsers() {
     allUsers = getAllUsers();
     displayUsers(allUsers);
 }
@@ -626,9 +576,7 @@ function toggleUserStatus(userId) {
     loadStatistics();
 }
 
-// ============== ACTIVITY LOG ==============
-
-function loadActivityLog() {
+// ============== ACTIVITY LOG =======function loadActivityLog() {
     const activities = getActivityLog();
     const container = document.getElementById('activity-log');
     
@@ -681,9 +629,7 @@ function getActivityLog() {
     return activities.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
 }
 
-// ============== STATISTICS ==============
-
-function loadStatistics() {
+// ============== STATISTICS =======function loadStatistics() {
     const users = getAllUsers();
     const appointments = JSON.parse(localStorage.getItem(StorageKeys.APPOINTMENTS) || '[]');
     const consultations = JSON.parse(localStorage.getItem(StorageKeys.CONSULTATIONS) || '[]');
@@ -703,9 +649,7 @@ function loadStatistics() {
     document.getElementById('active-users').textContent = activeUsers.length;
 }
 
-// ============== FEEDBACK ==============
-
-function loadFeedback() {
+// ============== FEEDBACK =======function loadFeedback() {
     const feedbacks = JSON.parse(localStorage.getItem('swasthya_feedbacks') || '[]');
     
     // Calculate statistics
@@ -776,9 +720,7 @@ function loadFeedback() {
     `).join('');
 }
 
-// ============== AI SENTIMENT ANALYSIS ==============
-
-async function analyzeSentiment(feedbackId, comment) {
+// ============== AI SENTIMENT ANALYSIS =======async function analyzeSentiment(feedbackId, comment) {
     const sentimentBadge = document.getElementById(`sentiment-${feedbackId}`);
     sentimentBadge.style.display = 'inline-block';
     sentimentBadge.className = 'badge badge-info';
@@ -868,4 +810,3 @@ function saveSentimentAnalysis(feedbackId, analysis) {
     analyses[feedbackId] = { ...analysis, analyzedAt: new Date().toISOString() };
     localStorage.setItem('swasthya_sentiment_analyses', JSON.stringify(analyses));
 }
->>>>>>> 5077bc9c683a2a0fb8a849ec2e6a1ee90d73b6ad

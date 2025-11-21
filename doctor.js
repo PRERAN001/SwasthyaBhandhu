@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 /**
  * SwasthyaBhandhu - Doctor Dashboard
  * 
@@ -40,8 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
     videoConsultation.initialize('local-video', 'remote-video', 'consultation-status');
 });
 
-// ============== PROFILE MANAGEMENT ==============
-
+// ============== PROFILE MANAGEMENT =======
 function loadProfile() {
     document.getElementById('profile-name').value = currentUser.name || '';
     document.getElementById('profile-specialization').value = currentUser.specialization || '';
@@ -77,8 +76,7 @@ function saveProfile(event) {
     return false;
 }
 
-// ============== APPOINTMENTS ==============
-
+// ============== APPOINTMENTS =======
 function loadAppointments() {
     const appointments = getAppointments();
     const tbody = document.getElementById('appointments-list');
@@ -183,8 +181,7 @@ function getStatusBadge(status) {
     return badges[status] || 'info';
 }
 
-// ============== VIDEO CONSULTATION ==============
-
+// ============== VIDEO CONSULTATION =======
 async function startConsultation() {
     const result = await videoConsultation.startConsultation({
         doctorId: currentUser.id,
@@ -232,8 +229,7 @@ function saveConsultationNotes() {
     }
 }
 
-// ============== AI VOICE TO SUMMARY GENERATOR ==============
-
+// ============== AI VOICE TO SUMMARY GENERATOR =======
 let mediaRecorder = null;
 let audioChunks = [];
 
@@ -335,8 +331,7 @@ async function callGroqAPI(prompt) {
     return data.choices[0]?.message?.content || 'Failed to generate content.';
 }
 
-// ============== PATIENT RECORDS ==============
-
+// ============== PATIENT RECORDS =======
 function loadPatients() {
     const patients = getAllUsers().filter(u => u.role === 'patient');
     const grid = document.getElementById('patients-grid');
@@ -405,8 +400,7 @@ function viewPatient(patientId) {
     openModal('view-patient-modal');
 }
 
-// ============== CONSULTATION HISTORY ==============
-
+// ============== CONSULTATION HISTORY =======
 function loadConsultationHistory() {
     const consultations = VideoConsultation.getConsultationHistory(currentUser.id);
     const container = document.getElementById('consultation-history-list');
@@ -450,8 +444,7 @@ function calculateDuration(start, end) {
     return `${duration} minutes`;
 }
 
-// ============== MESSAGING ==============
-
+// ============== MESSAGING =======
 function loadMessages() {
     const conversations = getConversations();
     const list = document.getElementById('conversations-list');
@@ -544,8 +537,7 @@ function sendMessage() {
     showAlert('Message sent', 'success');
 }
 
-// ============== ANALYTICS ==============
-
+// ============== ANALYTICS =======
 function loadAnalytics() {
     const patients = getAllUsers().filter(u => u.role === 'patient');
     const consultations = VideoConsultation.getConsultationHistory(currentUser.id);
@@ -571,51 +563,6 @@ function loadAnalytics() {
         </div>
     `).join('');
 }
-=======
-/**
- * SwasthyaBhandhu - Doctor Dashboard
- * 
- * NOTE: All data is static and stored in localStorage.
- * In production, replace with API calls to backend server.
- */
-
-// Global variables
-let currentUser = null;
-let videoConsultation = null;
-let currentConversation = null;
-
-// Groq API Configuration - Load from config.js
-const GROQ_API_KEY = () => CONFIG.GROQ_API_KEY || prompt('Please enter your Groq API key:');
-const GROQ_API_URL = CONFIG.GROQ_API_URL;
-
-// Initialize page
-document.addEventListener('DOMContentLoaded', () => {
-    // Check authentication
-    currentUser = requireAuth(['doctor']);
-    if (!currentUser) return;
-
-    // Display user name
-    document.getElementById('user-name').textContent = currentUser.name;
-
-    // Initialize tabs
-    initializeTabs('doctor-tabs');
-
-    // Load data
-    loadProfile();
-    loadAppointments();
-    loadPatients();
-    loadConsultationHistory();
-    loadMessages();
-    loadAnalytics();
-
-    // Initialize video consultation
-    videoConsultation = new VideoConsultation({ mode: 'simulation' });
-    videoConsultation.initialize('local-video', 'remote-video', 'consultation-status');
-});
-
-// ============== PROFILE MANAGEMENT ==============
-
-function loadProfile() {
     document.getElementById('profile-name').value = currentUser.name || '';
     document.getElementById('profile-specialization').value = currentUser.specialization || '';
     document.getElementById('profile-email').value = currentUser.email || '';
@@ -650,9 +597,7 @@ function saveProfile(event) {
     return false;
 }
 
-// ============== APPOINTMENTS ==============
-
-function loadAppointments() {
+// ============== APPOINTMENTS =======function loadAppointments() {
     const appointments = getAppointments();
     const tbody = document.getElementById('appointments-list');
     
@@ -756,9 +701,7 @@ function getStatusBadge(status) {
     return badges[status] || 'info';
 }
 
-// ============== VIDEO CONSULTATION ==============
-
-async function startConsultation() {
+// ============== VIDEO CONSULTATION =======async function startConsultation() {
     const result = await videoConsultation.startConsultation({
         doctorId: currentUser.id,
         doctorName: currentUser.name,
@@ -805,9 +748,7 @@ function saveConsultationNotes() {
     }
 }
 
-// ============== AI VOICE TO SUMMARY GENERATOR ==============
-
-let mediaRecorder = null;
+// ============== AI VOICE TO SUMMARY GENERATOR =======let mediaRecorder = null;
 let audioChunks = [];
 
 function startVoiceRecording() {
@@ -908,9 +849,7 @@ async function callGroqAPI(prompt) {
     return data.choices[0]?.message?.content || 'Failed to generate content.';
 }
 
-// ============== PATIENT RECORDS ==============
-
-function loadPatients() {
+// ============== PATIENT RECORDS =======function loadPatients() {
     const patients = getAllUsers().filter(u => u.role === 'patient');
     const grid = document.getElementById('patients-grid');
     
@@ -978,9 +917,7 @@ function viewPatient(patientId) {
     openModal('view-patient-modal');
 }
 
-// ============== CONSULTATION HISTORY ==============
-
-function loadConsultationHistory() {
+// ============== CONSULTATION HISTORY =======function loadConsultationHistory() {
     const consultations = VideoConsultation.getConsultationHistory(currentUser.id);
     const container = document.getElementById('consultation-history-list');
     
@@ -1023,9 +960,7 @@ function calculateDuration(start, end) {
     return `${duration} minutes`;
 }
 
-// ============== MESSAGING ==============
-
-function loadMessages() {
+// ============== MESSAGING =======function loadMessages() {
     const conversations = getConversations();
     const list = document.getElementById('conversations-list');
     
@@ -1117,9 +1052,7 @@ function sendMessage() {
     showAlert('Message sent', 'success');
 }
 
-// ============== ANALYTICS ==============
-
-function loadAnalytics() {
+// ============== ANALYTICS =======function loadAnalytics() {
     const patients = getAllUsers().filter(u => u.role === 'patient');
     const consultations = VideoConsultation.getConsultationHistory(currentUser.id);
     const appointments = getAppointments();
@@ -1144,4 +1077,3 @@ function loadAnalytics() {
         </div>
     `).join('');
 }
->>>>>>> 5077bc9c683a2a0fb8a849ec2e6a1ee90d73b6ad
