@@ -111,10 +111,12 @@
                                 <div class="elevenlabs-icon">🤖</div>
                                 <h3>AI Health Assistant Powered by ElevenLabs</h3>
                                 <p>Talk to our intelligent AI health assistant about your symptoms, concerns, and health questions.</p>
-                                <a href="https://elevenlabs.io/app/talk-to?agent_id=agent_8301kagt7x3mfx7t515njgbvzrx7" 
+                                <a href="#" 
+                                   id="elevenlabs-launch-btn"
                                    target="_blank" 
                                    rel="noopener noreferrer"
-                                   class="btn btn-primary btn-large">
+                                   class="btn btn-primary btn-large"
+                                   onclick="window.open(CONFIG.getElevenLabsUrl(), '_blank'); return false;">
                                     🎙️ Start AI Conversation
                                 </a>
                                 <p class="text-secondary mt-2" style="font-size: 0.875rem;">
@@ -393,6 +395,7 @@
     </div>
 
     <script src="assets/common.js"></script>
+    <script src="assets/config.js"></script>
     <script src="assets/video-consultation.js"></script>
     <script src="patient.js"></script>
 </body>

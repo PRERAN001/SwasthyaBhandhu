@@ -9,9 +9,9 @@
 let currentUser = null;
 let allUsers = [];
 
-// Groq API Configuration
-const GROQ_API_KEY = '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';
-const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
+// Groq API Configuration - Load from config.js
+const GROQ_API_KEY = () => CONFIG.GROQ_API_KEY || prompt('Please enter your Groq API key:');
+const GROQ_API_URL = CONFIG.GROQ_API_URL;
 
 // Initialize page
 document.addEventListener('DOMContentLoaded', () => {
@@ -398,11 +398,17 @@ Respond in JSON format: {"sentiment": "...", "tone": "...", "topics": ["..."], "
 }
 
 async function callGroqAPI(prompt) {
+    const apiKey = typeof GROQ_API_KEY === 'function' ? GROQ_API_KEY() : GROQ_API_KEY;
+    
+    if (!apiKey) {
+        throw new Error('Groq API key not configured');
+    }
+    
     const response = await fetch(GROQ_API_URL, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${GROQ_API_KEY}`
+            'Authorization': `Bearer ${apiKey}`
         },
         body: JSON.stringify({
             model: 'llama-3.3-70b-versatile',
