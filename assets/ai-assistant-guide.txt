@@ -1,0 +1,82 @@
+SwasthyaBhandhu - AI Health Assistant Integration Guide
+========================================================
+
+OVERVIEW:
+The AI Health Assistant has been integrated into the Patient Dashboard as a new tab.
+It combines ElevenLabs conversational AI with Groq API for report generation.
+
+FEATURES:
+1. ElevenLabs Conversational AI widget for voice/text interaction
+2. AI-powered health report generation using Groq API
+3. Conversation summary input
+4. Report storage and history
+5. Download reports as text files
+
+HOW IT WORKS:
+1. Patient talks to the ElevenLabs AI agent about their health concerns
+2. Patient summarizes the conversation in the text area
+3. Click "Generate Health Report" to create a comprehensive medical report
+4. Groq API (llama-3.3-70b-versatile model) analyzes the conversation
+5. Report includes: Chief Complaints, Symptoms Analysis, Assessment, Recommendations
+6. Reports are saved to localStorage and can be viewed/downloaded later
+
+TECHNICAL DETAILS:
+
+Groq API Configuration:
+- API Key: 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
+- Endpoint: https://api.groq.com/openai/v1/chat/completions
+- Model: llama-3.3-70b-versatile
+- Temperature: 0.7
+- Max Tokens: 2048
+
+ElevenLabs Integration:
+- Agent ID: agent_8301kagt7x3mfx7t515njgbvzrx7
+- URL: https://elevenlabs.io/app/talk-to?agent_id=agent_8301kagt7x3mfx7t515njgbvzrx7
+- Embedded via iframe with microphone permission
+
+Data Storage:
+- Health Reports: localStorage key 'swasthya_health_reports'
+- Conversation Notes: localStorage key 'swasthya_conversation_notes'
+
+FILES MODIFIED:
+1. patient.html - Added AI Health Assistant tab
+2. patient.css - Added styles for AI assistant interface
+3. patient.js - Added Groq API integration and report generation
+
+KEY FUNCTIONS:
+- generateHealthReport() - Main function to generate reports
+- callGroqAPI(prompt) - Makes API call to Groq
+- saveHealthReport(report) - Saves report to localStorage
+- displayHealthReport(report) - Displays generated report
+- loadPreviousReports() - Loads report history
+- downloadReport() - Downloads report as text file
+- saveConversationNotes() - Saves conversation summary
+
+USAGE INSTRUCTIONS:
+1. Login as a patient (patient@test.com / patient123)
+2. Go to "AI Health Assistant" tab
+3. Talk to the AI agent or enter conversation summary
+4. Click "Generate Health Report"
+5. View, download, or access previous reports
+
+PATIENT INFORMATION USED IN REPORTS:
+- Name
+- Age
+- Blood Group
+- Medical History
+- Allergies
+- Conversation Summary
+
+SECURITY NOTES:
+- API key is currently exposed in client-side code
+- In production, move API calls to backend server
+- Implement proper authentication and rate limiting
+- Encrypt sensitive health data
+
+FUTURE ENHANCEMENTS:
+- Direct conversation capture from ElevenLabs API
+- PDF report generation instead of text
+- Email report delivery
+- Doctor review integration
+- Multi-language report generation
+- Voice-to-text automatic transcription
