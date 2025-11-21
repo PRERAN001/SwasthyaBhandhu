@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* Pharmacist Dashboard Styles */
 
 /* Inventory Styles */
@@ -88,3 +89,95 @@
     margin-bottom: 0.5rem;
     border-radius: 0.375rem;
 }
+=======
+/* Pharmacist Dashboard Styles */
+
+/* Inventory Styles */
+.low-stock {
+    color: var(--danger-color);
+    font-weight: 600;
+}
+
+.expiring-soon {
+    color: var(--warning-color);
+    font-weight: 600;
+}
+
+/* Orders */
+.order-card {
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    background-color: var(--bg-white);
+}
+
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Prescriptions */
+.prescription-card {
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    background-color: var(--bg-white);
+}
+
+.medicine-list {
+    list-style: none;
+    padding: 0;
+}
+
+.medicine-list li {
+    padding: 0.5rem;
+    background-color: var(--bg-light);
+    border-radius: 0.375rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Feedback */
+.feedback-item {
+    padding: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.375rem;
+    margin-bottom: 1rem;
+}
+
+.feedback-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.feedback-rating {
+    color: #fbbf24;
+}
+
+/* Analytics */
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+.expiring-item {
+    padding: 1rem;
+    border-left: 4px solid var(--warning-color);
+    background-color: var(--bg-light);
+    margin-bottom: 0.5rem;
+    border-radius: 0.375rem;
+}
+>>>>>>> 5077bc9c683a2a0fb8a849ec2e6a1ee90d73b6ad
